@@ -4,7 +4,8 @@ import { fetchStations } from './api.js';
 import Station from './context.js'
 
 const vaa='940GZZLUAMS';
-let test=fetchStations(vaa);
+let test=fetchStations();
+test=JSON.parse(test);
 console.log(test);
 
 class App extends Component {

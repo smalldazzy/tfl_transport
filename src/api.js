@@ -5,7 +5,7 @@ const auth=`app_id=${APP_ID}&app_key=${APP_KEY}`;
 const G_API='AIzaSyDuLQPPCI1hxAFfPfV0bs4XKn0wlwBGMQw';
 
 
-async function fetchData(resource) {
+export async function fetchData(resource) {
   const response=await fetch(`https://api.tfl.gov.uk${resource}?${auth}`);
   return response.json();
 }
