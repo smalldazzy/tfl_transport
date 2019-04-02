@@ -31,7 +31,7 @@ export default class Provider extends Component {
   render() {
     return (
       // <Context.Provider>asda
-        <MapContainer store={this.state.stations}/>
+        <MapContainer store={this.state}/>
       // </Context.Provider>
     );
   }

@@ -10,8 +10,28 @@ const mapStyles = {
 };
 
 export class MapContainer extends Component {
+  // constructor (props){
+  //   super(props);
+  //   this.state = {
+  //       showingInfoWindow: false,
+  //       activeMarker: {},
+  //       selectedPlace: {}
+  //     }
+  //     onMarkerClick = (props, marker, e) => {
+  //       this.setState({
+  //         selectedPlace: props,
+  //         activeMarker: marker,
+  //         showingInfoWindow: true
+  //       });
+  //     }
+  // }
+
+
+
+
+
   render() {
-    console.log(this.props.store);
+    if (!this.props.store.loadingStations) console.log(this.props.store.stations[1].lat);
     console.log('tic');
     return (
       <Map
@@ -21,8 +41,9 @@ export class MapContainer extends Component {
         initialCenter={{
           lat: 51.519105,
           lng: -0.128405
-        }}
-      />
+        }}><Marker title = { 'Changing Colors Garage' }
+          position = {{ lat: 51.505068 , lng: -0.126524 }}/>
+        </Map>
     );
   }
 }
