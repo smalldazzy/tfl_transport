@@ -3,7 +3,7 @@ import { fetchStations } from "./api";
 
 const Context=React.createContext();
 
-class Provider extends Component {
+export default class Provider extends Component {
   state = {
     loadingStations: true,
     stations: [],
@@ -12,11 +12,14 @@ class Provider extends Component {
    async componentDidMount() {
      const stations = await fetchStations();
      this.setState(() => ({ stations, loadingStations: false }));
+     console.log(stations[0].commonName);
    }
+   
 
    render() {
     return (
-      <Context.Provider>
+      <Context.Provider>asda
+
       </Context.Provider>
     );
   }
@@ -24,4 +27,4 @@ class Provider extends Component {
 
 
 const Consumer = Context.Consumer;
-export {Provider, Consumer};
+//export {Provider, Consumer};

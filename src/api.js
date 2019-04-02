@@ -2,7 +2,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 const APP_ID='62d760f3';
 const APP_KEY='b3b04a0eaa09b7bf30e019bdf87a116b';
 const auth=`app_id=${APP_ID}&app_key=${APP_KEY}`;
-const G_API='AIzaSyDuLQPPCI1hxAFfPfV0bs4XKn0wlwBGMQw';
+//const G_API='AIzaSyDuLQPPCI1hxAFfPfV0bs4XKn0wlwBGMQw';
 
 
 export async function fetchData(resource) {
