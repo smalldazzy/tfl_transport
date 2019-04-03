@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import Provider from './context.js'
+//import Provider from './context.js'
 
 const G_API='AIzaSyDuLQPPCI1hxAFfPfV0bs4XKn0wlwBGMQw';
 
@@ -37,18 +37,35 @@ export class MapContainer extends Component {
    })
    // Create An InfoWindow
    let infowindow = new window.google.maps.InfoWindow()
-
    // Display Dynamic Markers
-   this.props.store.stations.map((stantion,index) => {
+   this.props.store.stations.map((station,index) => {
      // console.log(this.props.store.stations[index]);
-     let contentString = `${stantion.commonName}`
+     console.log(station);
+     let contentString = '<div id="content">'+
+     '<div id="siteNotice">' +
+     '</div><strong>' + station.commonName +
+     '</strong><div id="bodyContent">' +
+     '<ul>' +
+     `<li> NaptanId: ${station.naptanId}  </li>` +
+     `<li> Line: ${station.lines[0].name} </li>` +
+        '</ul>' +
+        '</div>' +
+        '</div>';
+
      let marker = new window.google.maps.Marker({
-       position: {lat: stantion.lat , lng: stantion.lon},
+       position: {lat: station.lat , lng: station.lon},
        map: map,
-       title: stantion.commonName
+       title: station.commonName,
+       info: {
+         title: station.commonName,
+         id: station.naptanID,
+         type: station.stopType
+       }
      })
+
      marker.addListener('click', function() {
 
+       // let contentString='jopa';
         // Change the content
         infowindow.setContent(contentString)
 
@@ -62,8 +79,8 @@ export class MapContainer extends Component {
 
 
   render() {
-    if (!this.props.store.loadingStations) console.log(this.props.store.stations[1].lat);
-    console.log('tic');
+    // if (!this.props.store.loadingStations) console.log(this.props.store.stations[1].lat);
+    // console.log('tic');
     return (
       <div id='map'></div>
       // <Map

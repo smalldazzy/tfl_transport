@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { fetchStations } from "./api";
 import MapContainer from './map'
 
-const Context=React.createContext();
+//const Context=React.createContext();
 
 export default class Provider extends Component {
   state = {
