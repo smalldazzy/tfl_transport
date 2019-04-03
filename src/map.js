@@ -4,23 +4,16 @@ import React, { Component } from 'react';
 
 const G_API='AIzaSyDuLQPPCI1hxAFfPfV0bs4XKn0wlwBGMQw';
 
-const mapStyles = {
-  width: '100%',
-  height: '100%'
-};
 
 export class MapContainer extends Component {
   state = {
     loading: true
   }
   componentDidMount(){
-    // this.renderMap();
   }
   componentDidUpdate(){
     if (!this.props.store.loadingStations) {
-      console.log('jopa');
       this.renderMap();
-      // this.initMarkers();
     }
   }
   renderMap = () => {
@@ -30,17 +23,12 @@ export class MapContainer extends Component {
 
 
   initMap = () => {
-   // Create A Map
    let map = new window.google.maps.Map(document.getElementById('map'), {
      center: {lat: 51.519105, lng: -0.128405},
      zoom: 11
    })
-   // Create An InfoWindow
    let infowindow = new window.google.maps.InfoWindow()
-   // Display Dynamic Markers
    this.props.store.stations.map((station,index) => {
-     // console.log(this.props.store.stations[index]);
-     console.log(station);
      let contentString = '<div id="content">'+
      '<div id="siteNotice">' +
      '</div><strong>' + station.commonName +
@@ -64,12 +52,7 @@ export class MapContainer extends Component {
      })
 
      marker.addListener('click', function() {
-
-       // let contentString='jopa';
-        // Change the content
         infowindow.setContent(contentString)
-
-        // Open An InfoWindow
         infowindow.open(map, marker)
       })
 
@@ -79,20 +62,8 @@ export class MapContainer extends Component {
 
 
   render() {
-    // if (!this.props.store.loadingStations) console.log(this.props.store.stations[1].lat);
-    // console.log('tic');
     return (
       <div id='map'></div>
-      // <Map
-      //   google={this.props.google}
-      //   zoom={10}
-      //   style={mapStyles}
-      //   initialCenter={{
-      //     lat: 51.519105,
-      //     lng: -0.128405
-      //   }}><Marker title = { 'Changing Colors Garage' }
-      //     position = {{ lat: 51.505068 , lng: -0.126524 }}/>
-      //   </Map>
     );
   }
 }
