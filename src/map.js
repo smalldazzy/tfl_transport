@@ -10,23 +10,18 @@ const mapStyles = {
 };
 
 export class MapContainer extends Component {
-  // constructor (props){
-  //   super(props);
-  //   this.state = {
-  //       showingInfoWindow: false,
-  //       activeMarker: {},
-  //       selectedPlace: {}
-  //     }
-  //     onMarkerClick = (props, marker, e) => {
-  //       this.setState({
-  //         selectedPlace: props,
-  //         activeMarker: marker,
-  //         showingInfoWindow: true
-  //       });
-  //     }
-  // }
+  state = {
+    loading: true
+  }
   componentDidMount(){
-    this.renderMap();
+    // this.renderMap();
+  }
+  componentDidUpdate(){
+    if (!this.props.store.loadingStations) {
+      console.log('jopa');
+      this.renderMap();
+      // this.initMarkers();
+    }
   }
   renderMap = () => {
     loadScript(`https://maps.googleapis.com/maps/api/js?key=${G_API}&callback=initMap`)
@@ -36,40 +31,33 @@ export class MapContainer extends Component {
 
   initMap = () => {
    // Create A Map
-   var map = new window.google.maps.Map(document.getElementById('map'), {
-     center: {lat: -34.397, lng: 150.644},
-     zoom: 8
+   let map = new window.google.maps.Map(document.getElementById('map'), {
+     center: {lat: 51.519105, lng: -0.128405},
+     zoom: 11
    })
- }
-
    // Create An InfoWindow
- //   var infowindow = new window.google.maps.InfoWindow()
- //
- //   // Display Dynamic Markers
- //   this.state.venues.map(myVenue => {
- //
- //     var contentString = `${myVenue.venue.name}`
- //
- //     // Create A Marker
- //     var marker = new window.google.maps.Marker({
- //       position: {lat: myVenue.venue.location.lat , lng: myVenue.venue.location.lng},
- //       map: map,
- //       title: myVenue.venue.name
- //     })
- //
- //     // Click on A Marker!
- //     marker.addListener('click', function() {
- //
- //       // Change the content
- //       infowindow.setContent(contentString)
- //
- //       // Open An InfoWindow
- //       infowindow.open(map, marker)
- //     })
- //
- //   })
- // }
+   let infowindow = new window.google.maps.InfoWindow()
 
+   // Display Dynamic Markers
+   this.props.store.stations.map((stantion,index) => {
+     // console.log(this.props.store.stations[index]);
+     let contentString = `${stantion.commonName}`
+     let marker = new window.google.maps.Marker({
+       position: {lat: stantion.lat , lng: stantion.lon},
+       map: map,
+       title: stantion.commonName
+     })
+     marker.addListener('click', function() {
+
+        // Change the content
+        infowindow.setContent(contentString)
+
+        // Open An InfoWindow
+        infowindow.open(map, marker)
+      })
+
+    })
+  }
 
 
 
